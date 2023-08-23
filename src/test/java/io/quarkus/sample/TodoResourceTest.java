@@ -40,7 +40,7 @@ class TodoResourceTest {
     @Order(2)
     void testAddingAnItem() {
         Todo todo = new Todo();
-        todo.title = "testing the application";
+        todo.setTitle("testing the application");
         given()
                 .body(todo)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -50,7 +50,7 @@ class TodoResourceTest {
                 .then()
                 .statusCode(HttpStatus.SC_CREATED)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body("title", is(todo.title))
+                .body("title", is(todo.getTitle()))
                 .body("completed", is(false))
                 .body("id", is(5));
 
@@ -65,8 +65,8 @@ class TodoResourceTest {
     @Order(3)
     void testUpdatingAnItem() {
         Todo todo = new Todo();
-        todo.title = "testing the application (updated)";
-        todo.completed = true;
+        todo.setTitle("testing the application (updated)");
+        todo.setCompleted(true);
         given()
                 .body(todo)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -77,7 +77,7 @@ class TodoResourceTest {
                 .then()
                 .statusCode(HttpStatus.SC_OK)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body("title", is(todo.title))
+                .body("title", is(todo.getTitle()))
                 .body("completed", is(true))
                 .body("id", is(5));
     }
